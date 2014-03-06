@@ -51,6 +51,8 @@ module.exports.init = function (_grunt) {
 module.exports.template = function () {
     // Check for existence of user defined template
     Sassdown.checkfor('template', datapath('template.hbs'));
+    // Add the navigation partial.
+    Handlebars.registerPartial('navigation', grunt.file.read(datapath('navigation.hbs')));
     // Return Sassdown.config.template object
     Sassdown.config.template = {
         html: Handlebars.compile(grunt.file.read(Sassdown.config.option.template)),

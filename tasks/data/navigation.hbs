@@ -1,0 +1,10 @@
+{{#each pages}}
+    {{#if isDirectory}}
+        <h2 class="heading">{{name}}</h2>
+        <ul class="group">
+        {{> navigation}}
+        </ul>
+    {{else}}
+        <a href="{{> root}}/{{href}}">{{title}}</a>
+    {{/if}}
+{{/each}}

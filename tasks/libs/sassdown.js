@@ -203,12 +203,18 @@ module.exports.formatting = function (content, styles) {
     // Create output object with unique id
     var output = {};
     //hljs.configure({useBR: true});
+
+    // Add a "split" helper to handlebars.
+    Handlebars.registerHelper('split', function(str) {
+      return str.split(", ");
+    });
+
     // If we find code blocks
     if (content.match(/```/)) {
         // Show comment
         output.comment = markdown(content.split(/```/)[0]);
         // Show result
-        output.result  = content.split(/```/)[1];
+        output.result  = Handlebars.compile(content.split(/```/)[1]);
         // Show markup
         output.markup  = '<pre class="hljs"><code>'+hljs.highlight('html', content.split(/```/)[1].split(/```/)[0]).value+'</code></pre>';
         // Does styles consist of more than whitespace?
